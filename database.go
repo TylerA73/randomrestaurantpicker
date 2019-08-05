@@ -62,7 +62,7 @@ func allRestaurants(restaurants *[]Restaurant) error {
  * Function addRestaurant
  * Param: restaurant string
  * Return: error
- * Description: 
+ * Description:
  * 		Adds a new restaurant to the database by the restaurant name
  *		Returns an error if the record could not be added
  */
