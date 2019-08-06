@@ -129,11 +129,11 @@ func addCategory(category string) error {
 	}
 
 	// Create a new Category struct c with the default ID value 0, and Name category
-	r := Category{0, category}
+	c := Category{0, category}
 
 	// Insert the new restaurant struct into the database
 	// If there was an error inserting the record, log and return the error
-	_, err = db.NamedExec(`INSERT INTO category (name) VALUES (:name)`, r)
+	_, err = db.NamedExec(`INSERT INTO category (name) VALUES (:name)`, c)
 	if err != nil {
 		log.Println(err)
 		return err

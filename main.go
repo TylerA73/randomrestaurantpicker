@@ -60,6 +60,7 @@ func main() {
 			addRestaurant(rest)
 		} else if cat != "" {
 			// TODO: Add category
+			addCategory(cat)
 		}
 	} else if del {
 		if rest != "" {
