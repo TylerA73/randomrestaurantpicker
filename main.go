@@ -45,7 +45,7 @@ func main() {
 		} else {
 			pickRandomRestaurant()
 		}
-	}else if list {
+	} else if list {
 		if cat != "" {
 			// TODO: List restaurants in a category
 		} else {
