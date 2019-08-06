@@ -17,6 +17,28 @@ type Restaurant struct {
 }
 
 /*
+ * Struct Category
+ * ID int
+ * Name string
+ */
+type Category struct {
+	ID   int    `db:"id"`
+	Name string `db:"name"`
+}
+
+/*
+ * Struct RestaurantCategory
+ * ID int
+ * RestaurantID int
+ * CategoryID int
+ */
+type RestaurantCategory struct {
+	ID   int    `db:"id"`
+	RestaurantID int `db:"restaurantid"`
+	CategoryID int `db:"categoryid"`
+}
+
+/*
  * Function connectToDb
  * Param: none
  * Return: *sqlx.DB, error
@@ -81,6 +103,37 @@ func addRestaurant(restaurant string) error {
 	// Insert the new restaurant struct into the database
 	// If there was an error inserting the record, log and return the error
 	_, err = db.NamedExec(`INSERT INTO restaurant (name) VALUES (:name)`, r)
+	if err != nil {
+		log.Println(err)
+		return err
+	}
+
+	return nil
+}
+
+/*
+ * Function addCategory
+ * Param: category string
+ * Return: error
+ * Description:
+ * 		Adds a new category to the database by the category name
+ *		Returns an error if the record could not be added
+ */
+func addCategory(category string) error {
+	// Create the database connection
+	// Log and raturn the error if there was an error connecting
+	db, err := connectToDb()
+	if err != nil {
+		log.Println(err)
+		return err
+	}
+
+	// Create a new Category struct c with the default ID value 0, and Name category
+	r := Category{0, category}
+
+	// Insert the new restaurant struct into the database
+	// If there was an error inserting the record, log and return the error
+	_, err = db.NamedExec(`INSERT INTO category (name) VALUES (:name)`, r)
 	if err != nil {
 		log.Println(err)
 		return err

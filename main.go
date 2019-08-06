@@ -10,37 +10,63 @@ import (
 
 // GLOBAL FLAG VARIABLES //
 var help bool
-var listAll bool
+var list bool
 var pick bool
-var add string
-var del string
+var add bool
+var del bool
+var cat string
+var rest string
 
 // Init function on run //
 func init() {
-	flag.StringVar(&add, "a", "", "Add a restaurant by `name`")
-	flag.StringVar(&del, "d", "", "Delete the restaurant by `name`")
+	flag.BoolVar(&add, "a", false, "Use add mode")
+	flag.BoolVar(&del, "d", false, "Use delete mode")
 	flag.BoolVar(&help, "h", false, "Display flag options and usage")
-	flag.BoolVar(&listAll, "l", false, "List all possible restaurants")
+	flag.BoolVar(&list, "l", false, "List all possible restaurants")
 	flag.BoolVar(&pick, "p", false, "Pick a random restaurant")
+	flag.StringVar(&cat, "c", "", "Specify the `name` of the category to add, delete, pick from, or list")
+	flag.StringVar(&rest, "r", "", "Specify the `name` of the restaurant to add, or delete")
 	flag.Parse()
 }
 
 // Main function
 func main() {
+	// Check different modes
+	// help = Help mode
+	// pick = Pick mode
+	// list = List mode
+	// add = Add mode
+	// del = Delete mode
 	if help {
 		flag.PrintDefaults()
-	}
-
-	if add != "" {
-		addRestaurant(add)
-	}
-
-	if listAll {
-		listAllRestaurants()
-	}
-
-	if pick {
-		pickRandomRestaurant()
+	} else if pick {
+		if cat != "" {
+			// TODO: Pick restaurant based on category
+		} else {
+			pickRandomRestaurant()
+		}
+	}else if list {
+		if cat != "" {
+			// TODO: List restaurants in a category
+		} else {
+			// List all restaurants
+			listAllRestaurants()
+		}
+	} else if add {
+		if rest != "" && cat != "" {
+			// TODO: Add restaurant with specified category
+		}else if rest != "" {
+			// Add restaurant with default category "Other"
+			addRestaurant(rest)
+		} else if cat != "" {
+			// TODO: Add category
+		}
+	} else if del {
+		if rest != "" {
+			// TODO: Delete restaurant
+		} else if cat != "" {
+			// TODO: Delete category
+		}
 	}
 }
 
